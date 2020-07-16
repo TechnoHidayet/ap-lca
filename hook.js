@@ -8,12 +8,12 @@ var request = require("request").defaults({
 
 if (!process.env.CALLBACK) {
   console.error(
-    "Lütfen CALLBACK urlsi giriniz (Projenizin website urlsini yazmanız gereklidir) nasıl yapılacağını bilmiyorsanız https://discord.gg/2As7sKn Discord sucunumuza gelerek yardım alabilirsiniz"
+    "Lütfen CALLBACK urlsi giriniz (Projenizin website urlsini yazmanız gereklidir)"
   );
   process.exit(1);
 }
 
-var channelId = process.env.CHID || "UCksJCCRy6Phc5W4MSp0Cjrg";
+var channelId = process.env.CHID || "YouTube Kanal ID";
 var topic =
   "https://www.youtube.com/xml/feeds/videos.xml?channel_id=" + channelId;
 var hub = "https://pubsubhubbub.appspot.com/";
@@ -42,7 +42,7 @@ setInterval(function() {
 }, 86400000); // refresh subscription every 24 hours
 
 pubSubSubscriber.on("listen", function() {
-  console.log("Kanalınız Gözetleniyor...");
+  console.log("Kanalınıza Bakılıyor");
   // log successful subscriptions
   pubSubSubscriber.on("subscribe", function(data) {
     console.log(

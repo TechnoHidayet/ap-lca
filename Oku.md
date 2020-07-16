@@ -10,4 +10,5 @@
 
 **POR**  8000 veya 8080 portunu kullanabilirsini.
 
-**CHI**  Youtube kanalınız ID'sini girinizg
+**CHI**  Youtube kanalınız ID'sini giriniz
+**DarkCode** Krallıkde Geç :)
