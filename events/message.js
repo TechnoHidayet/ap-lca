@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const ayarlar = require('../ayarlar.json');
+const th = require("../technohidayet.js");
 
 module.exports = async message => {
   
