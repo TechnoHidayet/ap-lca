@@ -1,36 +1,38 @@
-const db = require("quick.db");
-const Discord = require("discord.js");
-const ayarlar = require("../ayarlar.json");
-let prefix = ayarlar.prefix;
+const Discord = require('discord.js')
+const ayarlar = require('../ayarlar.json');
+const fs = require('fs');
+const db = require("quick.db")
+exports.run = async (bot , message, args) => {
 
-exports.run = function(client, message, args) {
+  let reason = args.slice(0).join(' ') 
+  if(!reason) return message.reply("Neden AFK Olduğunuzu Yazınız.")
+      setTimeout(function(){
 
-  var USER = message.author;
-  var REASON = args.slice(0).join("  ");
-  const embed = new Discord.MessageEmbed()
-  .setColor("#00ff00")
-  .setAuthor(message.author.username, message.author.avatarURL)
-  .setDescription(`Afk Olmak İçin Bir Sebep Belirtin.\n\n Örnek Kullanım : ${prefix}afk <sebep>`)
-  if(!REASON) return message.channel.send(embed)
-  db.set(`afk_${USER.id}`, REASON);
-  db.set(`afk_süre_${USER.id}`, Date.now());
-  const afk = new Discord.MessageEmbed()
-  .setColor("#00ff00")
-  .setAuthor(message.author.username, message.author.avatarURL)
-  .setDescription(`Başarıyla ${REASON} Sebebiyle \`Afk\` Moduna Başarıyla Girildi.`)
-  message.channel.send(afk)
- 
-};
- 
+  db.set(`afk_${message.author.id}, ${message.guild.id}`, reason)
+  
+  db.set(`afk-zaman_${message.author.id}, ${message.guild.id}`, Date.now())
+      },500)
+const botclub = new Discord.RichEmbed()
+.setTitle("<a:basarili:749532011483627541> Başarılı!")
+.setDescription("AFK Moduna Giriş Yapıldı.")
+.addField("Afk Nedeni;",`${reason}`)
+.setColor("GREEN")
+.setThumbnail(message.author.avatarURL)
+.setTimestamp()
+.setFooter(message.guild.name, message.guild.iconURL)
+  message.channel.send(botclub)
+  if(!message.member.nickname) return message.member.setNickname("[AFK] " + message.member.user.username)
+  message.member.setNickname("[AFK] " + message.member.nickname).catch(err => console.log(err));
+  }
 exports.conf = {
   enabled: true,
-  guildOnly: true,
+  guildOnly: false,
   aliases: [],
   permLevel: 0
 };
- 
+
 exports.help = {
   name: 'afk',
-  description: 'afk komutu',
-  usage: 'afk'
+  description: 'Afk Olursunuz.',
+  usage: '<prefix>afk'
 };

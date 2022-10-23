@@ -154,4 +154,54 @@ client.on("messageUpdate", async msg => {
   }
   if (!i) return;
 });
+client.on('message', msg => {
+    if (db.get(`reklamengel_${msg.guild.id}`) === 'kapalı') return;
+    if (db.get(`reklamengel_${msg.guild.id}`) === 'açık') {
+        var reklamlar = new RegExp(/(discord.gg|http|.gg|.com|.net|.org|invite|İnstagram|Facebook|watch|Youtube|youtube|facebook|instagram)/)
+        if (reklamlar.test(msg.content)== true) {
+             {
+              msg.delete()
+                var e = new Discord.MessageEmbed()
+                .setColor("ORANGE")
+                .setAuthor("Ad Block!")
+                .setDescription(`You can't adversiting in this server!`)
+                msg.reply(e) 
+            }
+        }
+            
+    }
+  });
+module.exports = async message => {
+  let client = message.client;
+  let prefix = ayarlar.prefix
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
+  let command = message.content.split(' ')[0].slice(prefix.length);
+  let params = message.content.split(' ').slice(1);
+  let perms = client.elevation(message);
+  let cmd;
+  if (client.commands.has(command)) {
+    cmd = client.commands.get(command);
+  } else if (client.aliases.has(command)) {
+    cmd = client.commands.get(client.aliases.get(command));
+  }
+  if (cmd) { 
+let dcsa = await db.fetch(`SC`,'aktif')
+if(dcsa) {
+ 
+  if(message.author.id !== "Idni Yaz")  {
+ 
+ let dcs = new Discord.RichEmbed()
+ .setTitle('Bakımda SC')
+ .setDescription(`\`Bot Bakımda SC/ Sracos Code   `) // \`
+ .setColor('RANDOM') // \`
+message.channel.send(dcs).then(dcs1 => dcs1.delete(5000))
+ return
+ } 
+  
+}
 
+    if (perms < cmd.conf.permLevel) return;
+    cmd.run(client, message, params, perms);
+  }
+}
