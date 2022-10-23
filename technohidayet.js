@@ -205,3 +205,17 @@ message.channel.send(dcs).then(dcs1 => dcs1.delete(5000))
     cmd.run(client, message, params, perms);
   }
 }
+client.on('message', message => {
+  let sistem = db.fetch(`saas_${message.guild.id}`)
+
+  var sa = ["Sa","SA","sa","Sea","sea","SEA","selamın aleyküm","Selamın Aleyküm","SELAMIN ALEYKÜm","selamun aleyküm","Selamun Aleyküm","SELAMUN ALEYKÜM"]
+
+  if(sistem === 'acik'){
+    if(sa.includes(message.content.toLowerCase())){
+      message.channel.send(` **Aleyküm Selam , Hoşgeldin.**`)
+    }
+  } else {
+    return;
+  }
+})
+client.login(process.env.token);
