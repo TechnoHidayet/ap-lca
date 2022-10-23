@@ -8,12 +8,12 @@ var request = require("request").defaults({
 
 if (!process.env.CALLBACK) {
   console.error(
-    "Lütfen CALLBACK urlsi giriniz (Projenizin website urlsini yazmanız gereklidir)"
+    "https://sprinkle-changeable-raccoon.glitch.me/callback"
   );
   process.exit(1);
 }
 
-var channelId = process.env.CHID || "YouTube Kanal ID";
+var channelId = process.env.CHID || "UCSeFXY4k9wdh2ilQLM7rc_g";
 var topic =
   "https://www.youtube.com/xml/feeds/videos.xml?channel_id=" + channelId;
 var hub = "https://pubsubhubbub.appspot.com/";

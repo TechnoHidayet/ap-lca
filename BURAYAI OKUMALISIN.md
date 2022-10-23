@@ -3,6 +3,7 @@ Discord Sunucumuz https://discord.gg/yNBGj2QkDc
 
 \*\*BU KOD TECHNOHİDAYETE AİDİR
 
+
 **YOUTUBE VİDEO BOT**
 
 **İLK ÖNCE** .env Kısmında Altakileri Ayarlayın
